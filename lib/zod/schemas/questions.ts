@@ -158,3 +158,23 @@ export const GetQuestionDetailsQuerySchema = z.object({
         .describe('O idioma desejado da questão')
         .openapi({ example: 'ingles' }),
 });
+
+export const GetRandomQuestionQuerySchema = z.object({
+    year: z.coerce
+        .number()
+        .int()
+        .positive()
+        .optional()
+        .describe('Filtrar questões por ano específico')
+        .openapi({ example: 2020 }),
+    discipline: z
+        .string()
+        .optional()
+        .describe('Filtrar questões por disciplina')
+        .openapi({ example: 'matematica' }),
+    language: z
+        .string()
+        .optional()
+        .describe('Filtrar questões por idioma')
+        .openapi({ example: 'ingles' }),
+});
