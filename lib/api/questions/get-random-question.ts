@@ -59,16 +59,22 @@ export async function getRandomQuestion(
         return null;
     }
 
-    // Select a random question
-    const randomIndex = Math.floor(Math.random() * allQuestions.length);
-    const randomQuestion = allQuestions[randomIndex];
+    // Shuffle questions to get random order
+    const shuffledQuestions = allQuestions.sort(() => Math.random() - 0.5);
 
-    // Fetch full question details
-    const questionDetails = await getQuestionDetails({
-        year: randomQuestion.year,
-        index: randomQuestion.index,
-        language: randomQuestion.language,
-    });
+    // Find the first question with images
+    for (const question of shuffledQuestions) {
+        const questionDetails = await getQuestionDetails({
+            year: question.year,
+            index: question.index,
+            language: question.language,
+        });
 
-    return questionDetails;
+        if (questionDetails && questionDetails.files.length > 0) {
+            return questionDetails;
+        }
+    }
+
+    // No question with images found
+    return null;
 }

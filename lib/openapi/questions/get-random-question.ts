@@ -7,9 +7,9 @@ import { openApiErrorResponses } from '@/lib/openapi/responses';
 
 export const getRandomQuestion: ZodOpenApiOperationObject = {
     operationId: 'getRandomQuestion',
-    summary: 'Obter questão aleatória',
+    summary: 'Obter questão aleatória com imagens',
     description:
-        'Obter uma questão aleatória de todas as provas disponíveis, com opções de filtro',
+        'Obter uma questão aleatória com imagens de todas as provas disponíveis, com opções de filtro',
     requestParams: {
         query: GetRandomQuestionQuerySchema,
     },
